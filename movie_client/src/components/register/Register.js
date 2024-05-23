@@ -1,5 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import RegisterForm from "../registerForm/RegisterForm";
+import { useState } from "react";
+import api from "../../api/axiosConfig";
+import localforage from "localforage";
+import { Container, Row, Col } from "react-bootstrap";
 
 function Register() {
   const navigate = useNavigate();
@@ -7,6 +11,7 @@ function Register() {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
+    reEnteredPassword: "",
     emailAddress: "",
     nickname: "",
   });
@@ -21,6 +26,18 @@ function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    for (const [key, value] of Object.entries(formData)) {
+      if (!value) {
+        alert(`The field "${key}" is required.`);
+        return;
+      }
+    }
+
+    if (formData.password !== formData.reEnteredPassword) {
+      alert("Passwords do not match");
+      return;
+    }
     try {
       const response = await api.post("/api/v1/users/register", {
         username: formData.username,
@@ -28,15 +45,22 @@ function Register() {
         emailAddress: formData.emailAddress,
         nickname: formData.nickname,
       });
-      console.log(response);
-      if (response.data === null) {
-        alert("The information you entered doesn't match our records.");
-      } else {
+      if (response.status == 200) {
+        alert("User registers successfully.");
+        navigate("/Login");
       }
     } catch (err) {
-      console.error(err);
-    }
-    // console.log("Form submitted:", formData);
+      if (err.response) {
+        if (err.response.status === 409) {
+          alert("Username already exists. Please choose a different username.");
+        } else {
+          alert("Registration failed. Please try again.");
+        }
+      } else {
+        console.error("Error:", err);
+        alert("Registration failed. Please try again.");
+      }
+    } // console.log("Form submitted:", formData);
   };
 
   return (
@@ -48,7 +72,7 @@ function Register() {
       </Row>
       <Row className="justify-content-md-center">
         <Col md="auto">
-          <h1>Login</h1>
+          <h1>Register</h1>
           <RegisterForm
             onSubmit={handleSubmit}
             onChange={handleChange}

@@ -10,12 +10,17 @@ import Review from "./components/review/Review";
 import ErrorPage from "./components/errorPage/ErrorPage";
 import Login from "./components/login/Login";
 import localforage from "localforage";
+import Register from "./components/register/Register";
+import Profile from "./components/profile/Profile";
+import Edit from "./components/edit/Edit";
+import ProtectedRoutes from "./components/protectedRoutes/ProtectedRoutes";
+// import Footer from "./components/footer/Footer";
 
 function App() {
   const [movies, setMovies] = useState([]);
   const [movie, setMovie] = useState();
   const [reviews, setReviews] = useState([]);
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
 
   const getMovies = async () => {
     try {
@@ -52,12 +57,16 @@ function App() {
 
   const handleLogOut = () => {
     setUser(null);
+    console.log(user);
   };
 
   useEffect(() => {
     getMovies();
-    getUser();
   }, []);
+
+  useEffect(() => {
+    getUser();
+  }, [user]);
 
   return (
     <div className="App">
@@ -77,13 +86,24 @@ function App() {
               />
             }
           ></Route>
-          <Route
-            path="/Login"
-            element={<Login onLogin={handleLogin} />}
-          ></Route>
+          <Route element={<ProtectedRoutes auth={!user} />}>
+            <Route
+              path="/Login"
+              element={<Login onLogin={handleLogin} />}
+            ></Route>
+            <Route path="/Register" element={<Register />}></Route>
+          </Route>
+          <Route element={<ProtectedRoutes auth={!!user} />}>
+            <Route
+              path="/Profile"
+              element={<Profile userData={user} />}
+            ></Route>
+            <Route path="/Profile/Edit" element={<Edit />}></Route>
+          </Route>
           <Route path="*" element=<ErrorPage />></Route>
         </Route>
       </Routes>
+      {/* <Footer /> */}
     </div>
   );
 }

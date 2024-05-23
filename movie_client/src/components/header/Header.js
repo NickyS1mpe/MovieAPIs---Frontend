@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faVideoSlash } from "@fortawesome/free-solid-svg-icons";
+import { faVideo, faUser } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "@mui/material";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -21,12 +21,19 @@ function Header({ hasLogin, onLogOut }) {
     navigate(`/Login`);
   };
 
+  const register = () => {
+    navigate(`/Register`);
+  };
+
+  const profile = () => {
+    navigate(`/Profile`);
+  };
+
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
-        <Navbar.Brand herf="/" style={{ color: "gold" }}>
-          <FontAwesomeIcon icon={faVideoSlash} />
-          Gold
+        <Navbar.Brand herf="/" style={{ color: "white" }}>
+          <FontAwesomeIcon icon={faVideo} /> Movie APIs
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbar" />
         <Navbar.Collapse id="navbarScroll">
@@ -51,18 +58,33 @@ function Header({ hasLogin, onLogOut }) {
               >
                 Login
               </Button>
-              <Button variant="outline-info" className="me-2">
+              <Button
+                variant="outline-info"
+                className="me-2"
+                onClick={() => register()}
+              >
                 Register
               </Button>
             </div>
           ) : (
-            <Button
-              variant="outline-info"
-              className="me-2"
-              onClick={() => logOut()}
-            >
-              Log Out
-            </Button>
+            <div>
+              <Navbar.Brand herf="/" style={{ color: "white" }}>
+                <Button
+                  variant="outline-info"
+                  className="me-2"
+                  onClick={() => profile()}
+                >
+                  <FontAwesomeIcon icon={faUser} />
+                </Button>
+              </Navbar.Brand>
+              <Button
+                variant="outline-info"
+                className="me-2"
+                onClick={() => logOut()}
+              >
+                Log Out
+              </Button>
+            </div>
           )}
         </Navbar.Collapse>
       </Container>
