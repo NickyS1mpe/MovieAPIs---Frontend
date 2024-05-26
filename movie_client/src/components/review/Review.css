@@ -1,0 +1,25 @@
+.parent-container {
+  position: relative;
+  min-height: 80vh;
+  background-image: url("https://img.freepik.com/free-photo/night-sky-glows-with-aurora-snowy-mountains-generative-ai_188544-12454.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5vh;
+}
+
+.blur-background {
+  background: rgba(185, 185, 185, 0.45);
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.225);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200vh;
+}

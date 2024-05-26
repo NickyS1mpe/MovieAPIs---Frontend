@@ -1,5 +1,6 @@
 import { Button } from "react-bootstrap";
 import "./Profile.css";
+import "../login/Login.css"
 import { useNavigate } from "react-router-dom";
 
 function Profile({ userData }) {
@@ -14,14 +15,13 @@ function Profile({ userData }) {
   };
 
   return (
-    <div className="parent-container">
-      <div className="blur-background">
+    <div className="parent">
+      <div className="blur">
         <div id="contact">
-          <div style={{ paddingRight: "10vh" }}>
+          <div style={{ paddingRight: "5vh" }}>
             <img
               key={userData.avatar}
               src={userData.avatar || null}
-              alt="avatar"
             />
           </div>
 

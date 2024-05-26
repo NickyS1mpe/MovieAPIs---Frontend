@@ -3,8 +3,8 @@
   background-color: black;
 }
 .movie-poster {
-  height: 300px;
-  border: 1px solid gold;
+  height: 350px;
+  border: 1px solid rgb(238, 238, 238);
   border-radius: 10px;
   overflow: hidden;
 }
@@ -56,7 +56,7 @@
 .play-button-icon {
   padding: 0px;
   margin: 0px;
-  color: gold;
+  color: rgb(212, 0, 0);
   font-size: 3rem;
   transition: 0.3s;
   cursor: pointer;

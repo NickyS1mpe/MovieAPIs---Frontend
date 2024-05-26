@@ -4,6 +4,8 @@ import { useState } from "react";
 import api from "../../api/axiosConfig";
 import localforage from "localforage";
 import { Container, Row, Col } from "react-bootstrap";
+import toast from "react-hot-toast";
+import "../login/Login.css";
 
 function Register() {
   const navigate = useNavigate();
@@ -29,13 +31,13 @@ function Register() {
 
     for (const [key, value] of Object.entries(formData)) {
       if (!value) {
-        alert(`The field "${key}" is required.`);
+        toast.error(`The field "${key}" is required.`);
         return;
       }
     }
 
     if (formData.password !== formData.reEnteredPassword) {
-      alert("Passwords do not match");
+      toast.error("Passwords do not match");
       return;
     }
     try {
@@ -46,41 +48,48 @@ function Register() {
         nickname: formData.nickname,
       });
       if (response.status == 200) {
-        alert("User registers successfully.");
+        toast.success("Successfully registered!");
+
         navigate("/Login");
       }
     } catch (err) {
       if (err.response) {
         if (err.response.status === 409) {
-          alert("Username already exists. Please choose a different username.");
+          toast.error(
+            "Username already exists. Please choose a different username."
+          );
         } else {
-          alert("Registration failed. Please try again.");
+          toast.error("Registration failed. Please try again.");
         }
       } else {
         console.error("Error:", err);
-        alert("Registration failed. Please try again.");
+        toast.error("Registration failed. Please try again.");
       }
     } // console.log("Form submitted:", formData);
   };
 
   return (
-    <Container>
-      <Row>
-        <Col>
-          <hr />
-        </Col>
-      </Row>
-      <Row className="justify-content-md-center">
-        <Col md="auto">
-          <h1>Register</h1>
-          <RegisterForm
-            onSubmit={handleSubmit}
-            onChange={handleChange}
-            formData={formData}
-          />
-        </Col>
-      </Row>
-    </Container>
+    <div className="parent-container">
+      <div className="blur-background">
+        <Container>
+          <Row className="justify-content-md-center">
+            <Col md="auto">
+              <h1>Register</h1>
+              <Row>
+                <Col>
+                  <hr />
+                </Col>
+              </Row>
+              <RegisterForm
+                onSubmit={handleSubmit}
+                onChange={handleChange}
+                formData={formData}
+              />
+            </Col>
+          </Row>
+        </Container>
+      </div>
+    </div>
   );
 }
 

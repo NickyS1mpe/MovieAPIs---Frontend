@@ -7,6 +7,7 @@ import Navbar from "react-bootstrap/Navbar";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import localforage from "localforage";
+import toast from "react-hot-toast";
 
 function Header({ hasLogin, onLogOut }) {
   const navigate = useNavigate();
@@ -18,6 +19,8 @@ function Header({ hasLogin, onLogOut }) {
   const logOut = async () => {
     await localforage.removeItem("userData");
     onLogOut();
+    toast.success("Successfully logged out!");
+
     navigate(`/Login`);
   };
 

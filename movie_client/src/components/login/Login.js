@@ -4,6 +4,8 @@ import LoginForm from "../loginForm/LoginForm";
 import api from "../../api/axiosConfig";
 import localforage from "localforage";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import "./Login.css";
 
 const Login = ({ onLogin }) => {
   const navigate = useNavigate();
@@ -23,6 +25,13 @@ const Login = ({ onLogin }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    for (const [key, value] of Object.entries(formData)) {
+      if (!value) {
+        toast.error(`The field "${key}" is required.`);
+        return;
+      }
+    }
+
     try {
       const response = await api.post("/api/v1/users/login", {
         username: formData.username,
@@ -30,11 +39,12 @@ const Login = ({ onLogin }) => {
       });
       console.log(response);
       if (response.data === null) {
-        alert("The information you entered doesn't match our records.");
+        toast.error("The information you entered doesn't match our records.");
       } else {
         const user = response.data;
         await localforage.setItem("userData", user);
         onLogin(user);
+        toast.success("Successfully login!");
         navigate("/");
       }
     } catch (err) {
@@ -44,23 +54,27 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <Container>
-      <Row>
-        <Col>
-          <hr />
-        </Col>
-      </Row>
-      <Row className="justify-content-md-center">
-        <Col md="auto">
-          <h1>Login</h1>
-          <LoginForm
-            onSubmit={handleSubmit}
-            onChange={handleChange}
-            formData={formData}
-          />
-        </Col>
-      </Row>
-    </Container>
+    <div className="parent">
+      <div className="blur">
+        <Container>
+          <Row className="justify-content-md-center">
+            <Col md="auto">
+              <h1>Login</h1>
+              <Row>
+                <Col>
+                  <hr />
+                </Col>
+              </Row>
+              <LoginForm
+                onSubmit={handleSubmit}
+                onChange={handleChange}
+                formData={formData}
+              />
+            </Col>
+          </Row>
+        </Container>
+      </div>
+    </div>
   );
 };
 

@@ -12,7 +12,7 @@ function ReviewForm({ handleSubmit, revText, labelText, defaultValue }) {
           defaultValue={defaultValue}
         />
       </Form.Group>
-      <Button variant="outline-info" onClick={handleSubmit}>
+      <Button variant="primary" onClick={handleSubmit}>
         Submit
       </Button>
     </Form>

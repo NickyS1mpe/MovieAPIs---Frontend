@@ -4,7 +4,6 @@
   gap: 1rem;
   justify-content: center;
   align-items: center;
-  padding-top: 5vh;
 }
 #contact-form > Form.Group:first-child {
   margin: 0;
@@ -52,4 +51,28 @@
 
 #contact-form p:last-child button[type="button"] {
   color: (0, 0, 0);
+}
+
+.parent-container {
+  position: relative;
+  min-height: 100vh;
+  background-image: url("https://images.unsplash.com/photo-1519681393784-d120267933ba?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1124&q=100");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.blur-background {
+  background: rgba(185, 185, 185, 0.45);
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.225);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

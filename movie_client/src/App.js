@@ -14,6 +14,8 @@ import Register from "./components/register/Register";
 import Profile from "./components/profile/Profile";
 import Edit from "./components/edit/Edit";
 import ProtectedRoutes from "./components/protectedRoutes/ProtectedRoutes";
+import { Toaster } from "react-hot-toast";
+
 // import Footer from "./components/footer/Footer";
 
 function App() {
@@ -70,6 +72,10 @@ function App() {
 
   return (
     <div className="App">
+      <div>
+        <Toaster position="bottom-right" reverseOrder={false} />
+      </div>
+
       <Header hasLogin={user !== null} onLogOut={handleLogOut} />
       <Routes>
         <Route path="/" element={<Layout />}>
@@ -83,6 +89,7 @@ function App() {
                 movie={movie}
                 reviews={reviews}
                 setReviews={setReviews}
+                user={user}
               />
             }
           ></Route>
