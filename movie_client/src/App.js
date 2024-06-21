@@ -12,6 +12,7 @@ import Login from "./components/login/Login";
 import localforage from "localforage";
 import Register from "./components/register/Register";
 import Profile from "./components/profile/Profile";
+import WatchList from "./components/watchList/WatchList";
 import Edit from "./components/edit/Edit";
 import ProtectedRoutes from "./components/protectedRoutes/ProtectedRoutes";
 import { Toaster } from "react-hot-toast";
@@ -79,7 +80,10 @@ function App() {
       <Header hasLogin={user !== null} onLogOut={handleLogOut} />
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route path="/" element={<Home movies={movies} />}></Route>
+          <Route
+            path="/"
+            element={<Home movies={movies} user={user} />}
+          ></Route>
           <Route path="/Trailer/:ytTrailerId" element={<Trailer />}></Route>
           <Route
             path="/Reviews/:movieId"
@@ -107,6 +111,10 @@ function App() {
             ></Route>
             <Route path="/Profile/Edit" element={<Edit />}></Route>
           </Route>
+          <Route
+            path="/WatchList"
+            element={<WatchList movies={movies} user={user} />}
+          ></Route>
           <Route path="*" element=<ErrorPage />></Route>
         </Route>
       </Routes>

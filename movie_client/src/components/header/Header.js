@@ -48,7 +48,7 @@ function Header({ hasLogin, onLogOut }) {
             <NavLink className="nav-link" to="/">
               Home
             </NavLink>
-            <NavLink className="nav-link" to="/">
+            <NavLink className="nav-link" to="/WatchList">
               Watch List
             </NavLink>
           </Nav>

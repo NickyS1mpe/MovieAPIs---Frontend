@@ -2,16 +2,57 @@ import "./Hero.css";
 import Carousel from "react-material-ui-carousel";
 import { Paper } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCirclePlay } from "@fortawesome/free-solid-svg-icons";
+import { faCirclePlay, faStar } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
+import api from "../../api/axiosConfig";
+import toast from "react-hot-toast";
+import localforage from "localforage";
 
-const Hero = ({ movies }) => {
+const Hero = ({ movies, user }) => {
   const navigate = useNavigate();
+  const watchList = user ? user.watchList : null;
 
   function reviews(movieId) {
     navigate(`/Reviews/${movieId}`);
   }
+
+  const addWatchList = async (id) => {
+    if (!user) {
+      toast.error("please login first to edit watch list");
+      return;
+    }
+    try {
+      const response = await api.post("/api/v1/users/addWatchList", {
+        username: user.username,
+        imdbId: id,
+      });
+
+      const userData = response.data;
+      await localforage.setItem("userData", userData);
+      toast.success("successfully add watch list!");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const removeWatchList = async (id) => {
+    if (!user) {
+      toast.error("please login first to edit watch list");
+      return;
+    }
+    try {
+      const response = await api.post("/api/v1/users/removeWatchList", {
+        username: user.username,
+        imdbId: id,
+      });
+      const userData = response.data;
+      await localforage.setItem("userData", userData);
+      toast.success("successfully remove watch list!");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div>
@@ -54,6 +95,26 @@ const Hero = ({ movies }) => {
                             >
                               Reviews
                             </Button>
+                          </div>
+
+                          <div
+                            className="star-icon-container"
+                            onClick={() =>
+                              watchList && watchList.includes(movie.imdbId)
+                                ? removeWatchList(movie.imdbId)
+                                : addWatchList(movie.imdbId)
+                            }
+                          >
+                            <FontAwesomeIcon
+                              className="star-icon"
+                              icon={faStar}
+                              style={{
+                                color:
+                                  watchList && watchList.includes(movie.imdbId)
+                                    ? "rgb(255, 183, 0)"
+                                    : "rgb(255, 255, 255)",
+                              }}
+                            />
                           </div>
                         </div>
                       </div>

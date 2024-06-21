@@ -1,6 +1,6 @@
 import { Button } from "react-bootstrap";
 import "./Profile.css";
-import "../login/Login.css"
+import "../login/Login.css";
 import { useNavigate } from "react-router-dom";
 
 function Profile({ userData }) {
@@ -19,10 +19,7 @@ function Profile({ userData }) {
       <div className="blur">
         <div id="contact">
           <div style={{ paddingRight: "5vh" }}>
-            <img
-              key={userData.avatar}
-              src={userData.avatar || null}
-            />
+            <img key={userData.avatar} src={userData.avatar || null} />
           </div>
 
           <div>
@@ -43,6 +40,7 @@ function Profile({ userData }) {
             )}
 
             {userData.emailAddress && <p>{userData.emailAddress}</p>}
+            {userData.joinDate && <p>{userData.joinDate}</p>}
 
             {userData.notes && (
               <p style={{ width: "30vh" }}>{userData.notes}</p>

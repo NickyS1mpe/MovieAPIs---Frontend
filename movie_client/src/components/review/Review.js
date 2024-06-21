@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import ReviewForm from "../reviewForm/ReviewForm";
 import toast from "react-hot-toast";
-import './Review.css'
+import "./Review.css";
 
 function Review({ getMovieData, movie, reviews, setReviews, user }) {
   const revText = useRef();
@@ -59,8 +59,8 @@ function Review({ getMovieData, movie, reviews, setReviews, user }) {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div className="parent-container">
-      <div className="blur-background">
+    <div className="parent-c">
+      <div className="blur-b">
         <Container>
           <Row>
             <Col>
@@ -69,10 +69,7 @@ function Review({ getMovieData, movie, reviews, setReviews, user }) {
           </Row>
           <Row className="mt-2">
             <Col>
-              <img
-                src={movie?.poster}
-                alt=""
-              />
+              <img src={movie?.poster} alt="" />
             </Col>
             <Col>
               <Col>

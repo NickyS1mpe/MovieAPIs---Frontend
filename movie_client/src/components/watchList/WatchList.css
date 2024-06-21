@@ -1,0 +1,54 @@
+.sidebar {
+  width: 280px;
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-right: 1px solid #ddd;
+  background-color: #e0e0e0;
+  position: fixed;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.search-input {
+  width: 180px;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.magnify {
+  padding: 10px;
+  cursor: pointer;
+  color: black;
+}
+
+.user-list {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-item {
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  color: rgb(0, 0, 0);
+}
+
+.user-item:hover {
+  background-color: #ffffff;
+}
+
+.user-item.selected {
+  background-color: #3366ff;
+  color: rgb(0, 0, 0);
+}

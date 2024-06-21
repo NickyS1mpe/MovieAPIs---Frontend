@@ -9,7 +9,7 @@ function Trailer() {
     <div className="react-player-container">
       {key != null ? (
         <ReactPlayer
-          controls="True"
+          controls={true}
           playing={true}
           url={`https://www.youtube.com/watch?v=${key}`}
           width="100%"

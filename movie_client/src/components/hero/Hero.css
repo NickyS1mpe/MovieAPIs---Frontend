@@ -62,8 +62,26 @@
   cursor: pointer;
 }
 .play-button-icon:hover {
-  font-size: 4rem;
+  font-size: 3rem;
   color: white;
+}
+
+.star-icon-container {
+  padding-left: 10px;
+  margin: 0px;
+  width: 150px;
+}
+.star-icon {
+  padding: 0px;
+  margin: 0px;
+  color: rgb(255, 255, 255);
+  font-size: 2rem;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.star-icon:hover {
+  font-size: 2rem;
+  color: rgb(255, 183, 0);
 }
 
 /* make carousel adapts to smaller screen*/

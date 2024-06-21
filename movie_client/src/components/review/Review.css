@@ -1,4 +1,4 @@
-.parent-container {
+.parent-c {
   position: relative;
   min-height: 80vh;
   background-image: url("https://img.freepik.com/free-photo/night-sky-glows-with-aurora-snowy-mountains-generative-ai_188544-12454.jpg");
@@ -11,7 +11,7 @@
   padding: 5vh;
 }
 
-.blur-background {
+.blur-b {
   background: rgba(185, 185, 185, 0.45);
   -webkit-backdrop-filter: blur(10px); /* For Safari */
   backdrop-filter: blur(10px);
